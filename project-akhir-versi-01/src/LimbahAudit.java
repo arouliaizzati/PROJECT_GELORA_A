@@ -1,7 +1,9 @@
 public abstract class LimbahAudit {
+    protected String jenis;
     protected double beratKg;
 
-    public LimbahAudit(double beratKg) {
+    public LimbahAudit(String jenis, double beratKg) {
+        this.jenis = jenis;
         this.beratKg = beratKg;
     }
 
@@ -9,6 +11,6 @@ public abstract class LimbahAudit {
     public abstract void prosesPengolahan();
 
     public void tampilkanInfo() {
-        System.out.println("Berat limbah: " + beratKg + " kg");
+        System.out.println("Jenis Limbah: " + jenis + " | Berat: " + beratKg + " kg");
     }
 }

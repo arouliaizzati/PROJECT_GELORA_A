@@ -1,5 +1,7 @@
 public class SertifikatKeberlanjutan implements Dilaporkan, Terverifikasi {
+    @SuppressWarnings("FieldMayBeFinal")
     private String namaKegiatan;
+    @SuppressWarnings("FieldMayBeFinal")
     private boolean auditSelesai;
 
     public SertifikatKeberlanjutan(String namaKegiatan, boolean auditSelesai) {

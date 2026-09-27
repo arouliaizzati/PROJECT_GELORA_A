@@ -1,8 +1,9 @@
 public class LimbahAnorganik extends LimbahAudit {
+    @SuppressWarnings("FieldMayBeFinal")
     private String jenisMaterial;
 
     public LimbahAnorganik(double beratKg, String jenisMaterial) {
-        super(beratKg);
+        super("Anorganik", beratKg);
         this.jenisMaterial = jenisMaterial;
     }
 

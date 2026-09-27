@@ -1,9 +1,7 @@
 public class LimbahOrganik extends LimbahAudit {
-    private double persentaseKelembapan;
 
     public LimbahOrganik(double beratKg, double persentaseKelembapan) {
-        super(beratKg);
-        this.persentaseKelembapan = persentaseKelembapan;
+        super("Organik", beratKg);
     }
 
     @Override

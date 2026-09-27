@@ -1,4 +1,5 @@
 public class AuditFisik implements Terverifikasi {
+    @SuppressWarnings("FieldMayBeFinal")
     private boolean fotoBuktiAda;
 
     public AuditFisik(boolean fotoBuktiAda) {

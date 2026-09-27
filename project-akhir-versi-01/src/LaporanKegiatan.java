@@ -1,4 +1,5 @@
 public class LaporanKegiatan implements Dilaporkan {
+    @SuppressWarnings("FieldMayBeFinal")
     private String namaKegiatan;
 
     public LaporanKegiatan(String namaKegiatan) {
