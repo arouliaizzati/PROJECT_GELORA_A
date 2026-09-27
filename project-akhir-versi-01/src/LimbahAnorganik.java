@@ -1,6 +1,6 @@
 // Turunan 2 dari LimbahAudit
 public class LimbahAnorganik extends LimbahAudit {
-    private String jenisMaterial; // contoh: Plastik, Kardus
+    private final String jenisMaterial;
 
     public LimbahAnorganik(double beratKg, String jenisMaterial) {
         super("Anorganik (" + jenisMaterial + ")", beratKg);
@@ -9,7 +9,6 @@ public class LimbahAnorganik extends LimbahAudit {
 
     @Override
     public double hitungEstimasiEmisi() {
-        // faktor emisi jika anorganik tidak didaur ulang (kg CO2e per kg)
         return beratKg * 1.2;
     }
 
@@ -18,7 +17,6 @@ public class LimbahAnorganik extends LimbahAudit {
         System.out.println("-> Disalurkan ke komunitas/bank sampah untuk didaur ulang.");
     }
 
-    // ---- Method khusus milik LimbahAnorganik ----
     public double hitungNilaiDaurUlang() {
         double hargaPerKg = jenisMaterial.equalsIgnoreCase("Plastik") ? 2000 : 1000;
         return beratKg * hargaPerKg;
