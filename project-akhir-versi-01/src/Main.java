@@ -1,6 +1,6 @@
 public class Main {
     public static void main(String[] args) {
-        System.out.println("========== DEMO ABSTRACT CLASS: LimbahAudit ==========");
+        System.out.println("========== ABSTRACT CLASS: LimbahAudit ==========");
 
         LimbahAudit organik = new LimbahOrganik(50, 70);
         organik.tampilkanInfo();
@@ -15,7 +15,7 @@ public class Main {
         double nilaiDaurUlang = ((LimbahAnorganik) anorganik).hitungNilaiDaurUlang();
         System.out.printf(java.util.Locale.US, "-> Estimasi nilai daur ulang: Rp%.0f%n", nilaiDaurUlang);
 
-        System.out.println("\n========== DEMO INTERFACE (Penerbitan Sertifikat GELORA) ==========");
+        System.out.println("\n========== INTERFACE (Penerbitan Sertifikat GELORA) ==========");
 
         // Interface 1 saja
         LaporanKegiatan laporan = new LaporanKegiatan("Dies Natalis Fakultas Vokasi");
