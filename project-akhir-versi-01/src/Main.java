@@ -18,7 +18,7 @@ public class Main {
         System.out.println("\n========== INTERFACE (Penerbitan Sertifikat GELORA) ==========");
 
         // Interface 1 saja
-        LaporanKegiatan laporan = new LaporanKegiatan("Dies Natalis Fakultas Vokasi");
+        LaporanKegiatan laporan = new LaporanKegiatan("MPKMB SV IPB");
         laporan.buatSertifikat();
         laporan.exportPDF();
 
@@ -32,7 +32,7 @@ public class Main {
         System.out.println();
 
         // Implementasi Kedua Interface
-        SertifikatKeberlanjutan sertifikat = new SertifikatKeberlanjutan("Seminar Nasional Lingkungan", true);
+        SertifikatKeberlanjutan sertifikat = new SertifikatKeberlanjutan("MPKMB SV IPB 63", true);
         sertifikat.buatSertifikat();
         sertifikat.exportPDF();
         sertifikat.verifikasiData();
