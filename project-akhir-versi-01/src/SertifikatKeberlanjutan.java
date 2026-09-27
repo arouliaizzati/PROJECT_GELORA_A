@@ -8,22 +8,22 @@ public class SertifikatKeberlanjutan implements Dilaporkan, Terverifikasi {
     }
 
     @Override
-    public void buatLaporan() {
-        System.out.println("Menyusun One-Page Sustainability Summary untuk: " + namaKegiatan);
+    public void buatSertifikat() {
+        System.out.println("Membuat Sertifikat Keberlanjutan Resmi untuk kegiatan: " + namaKegiatan);
     }
 
     @Override
     public void exportPDF() {
-        System.out.println("Sertifikat Keberlanjutan '" + namaKegiatan + "' diterbitkan dalam format PDF + QR validasi.");
+        System.out.println("Mengeksport Sertifikat Keberlanjutan (PDF dengan QR Code Verifikasi) untuk lampiran LPJ...");
     }
 
     @Override
-    public boolean verifikasiData() {
-        return auditSelesai;
+    public void verifikasiData() {
+        System.out.println("Memverifikasi keabsahan Sertifikat Keberlanjutan via sistem GELORA...");
     }
 
     @Override
     public String getStatusVerifikasi() {
-        return auditSelesai ? "Audit Selesai - Sertifikat Sah" : "Audit Belum Selesai - Ekspor Dinonaktifkan";
+        return auditSelesai ? "Sertifikat Keberlanjutan Valid & Terverifikasi" : "Belum Terverifikasi";
     }
 }

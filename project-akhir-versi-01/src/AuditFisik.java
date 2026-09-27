@@ -6,12 +6,12 @@ public class AuditFisik implements Terverifikasi {
     }
 
     @Override
-    public boolean verifikasiData() {
-        return fotoBuktiAda;
+    public void verifikasiData() {
+        System.out.println("Memeriksa kelengkapan foto bukti audit fisik...");
     }
 
     @Override
     public String getStatusVerifikasi() {
-        return fotoBuktiAda ? "Terverifikasi" : "Ditolak - Foto Bukti Belum Lengkap";
+        return fotoBuktiAda ? "Audit Fisik Terverifikasi (Foto Bukti Valid)" : "Audit Fisik Gagal (Foto Bukti Tidak Ada)";
     }
 }

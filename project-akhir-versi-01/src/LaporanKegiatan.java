@@ -6,12 +6,12 @@ public class LaporanKegiatan implements Dilaporkan {
     }
 
     @Override
-    public void buatLaporan() {
-        System.out.println("Membuat laporan rekapitulasi untuk kegiatan: " + namaKegiatan);
+    public void buatSertifikat() {
+        System.out.println("Membuat Sertifikat Audit Sampah untuk kegiatan: " + namaKegiatan);
     }
 
     @Override
     public void exportPDF() {
-        System.out.println("Laporan '" + namaKegiatan + "' berhasil diekspor ke PDF.");
+        System.out.println("Mengeksport Sertifikat Audit Sampah ke format PDF (Siap disisipkan ke LPJ)...");
     }
 }

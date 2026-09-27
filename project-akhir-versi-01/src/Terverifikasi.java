@@ -1,4 +1,4 @@
 public interface Terverifikasi {
-    boolean verifikasiData();
+    void verifikasiData();
     String getStatusVerifikasi();
 }

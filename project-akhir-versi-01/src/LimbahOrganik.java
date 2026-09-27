@@ -1,26 +1,23 @@
-// Turunan 1 dari LimbahAudit
 public class LimbahOrganik extends LimbahAudit {
-    private double kadarAirPersen;
+    private double persentaseKelembapan;
 
-    public LimbahOrganik(double beratKg, double kadarAirPersen) {
-        super("Organik (Sisa Makanan)", beratKg);
-        this.kadarAirPersen = kadarAirPersen;
+    public LimbahOrganik(double beratKg, double persentaseKelembapan) {
+        super(beratKg);
+        this.persentaseKelembapan = persentaseKelembapan;
     }
 
     @Override
     public double hitungEstimasiEmisi() {
-        // faktor emisi limbah organik jika dibuang ke TPA (kg CO2e per kg)
         return beratKg * 0.5;
     }
 
     @Override
     public void prosesPengolahan() {
-        System.out.println("-> Diproses menjadi kompos / pakan maggot (BSF).");
+        System.out.println("Limbah organik diproses melalui pengomposan anaerob/aerob.");
     }
 
-    // ---- Method khusus milik LimbahOrganik ----
     public void konversiKompos() {
-        double hasilKompos = beratKg * (1 - kadarAirPersen / 100) * 0.4;
+        double hasilKompos = beratKg * 0.4;
         System.out.printf(java.util.Locale.US, "-> Estimasi kompos yang dihasilkan: %.2f kg%n", hasilKompos);
     }
 }

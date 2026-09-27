@@ -1,4 +1,4 @@
 public interface Dilaporkan {
-    void buatLaporan();
+    void buatSertifikat();
     void exportPDF();
 }

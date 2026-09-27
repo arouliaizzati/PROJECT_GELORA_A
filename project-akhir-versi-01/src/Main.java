@@ -1,6 +1,6 @@
 public class Main {
     public static void main(String[] args) {
-        System.out.println("========== ABSTRACT CLASS: LimbahAudit ==========");
+        System.out.println("========== DEMO ABSTRACT CLASS: LimbahAudit ==========");
 
         LimbahAudit organik = new LimbahOrganik(50, 70);
         organik.tampilkanInfo();
@@ -15,22 +15,27 @@ public class Main {
         double nilaiDaurUlang = ((LimbahAnorganik) anorganik).hitungNilaiDaurUlang();
         System.out.printf(java.util.Locale.US, "-> Estimasi nilai daur ulang: Rp%.0f%n", nilaiDaurUlang);
 
-        System.out.println("\n========== INTERFACE ==========");
+        System.out.println("\n========== DEMO INTERFACE (Penerbitan Sertifikat GELORA) ==========");
 
-        LaporanKegiatan laporan = new LaporanKegiatan("MPKMB 63 IPB UNIVERSITY");
-        laporan.buatLaporan();
+        // Interface 1 saja
+        LaporanKegiatan laporan = new LaporanKegiatan("Dies Natalis Fakultas Vokasi");
+        laporan.buatSertifikat();
         laporan.exportPDF();
 
         System.out.println();
 
+        // Interface 2 saja
         AuditFisik audit = new AuditFisik(true);
+        audit.verifikasiData();
         System.out.println("Status audit fisik: " + audit.getStatusVerifikasi());
 
         System.out.println();
 
-        SertifikatKeberlanjutan sertifikat = new SertifikatKeberlanjutan("MPKMB 63 SEKOLAH VOKASI IPB UNIVERSITY", true);
-        sertifikat.buatLaporan();
+        // Implementasi Kedua Interface
+        SertifikatKeberlanjutan sertifikat = new SertifikatKeberlanjutan("Seminar Nasional Lingkungan", true);
+        sertifikat.buatSertifikat();
         sertifikat.exportPDF();
+        sertifikat.verifikasiData();
         System.out.println("Status: " + sertifikat.getStatusVerifikasi());
     }
 }
