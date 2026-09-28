@@ -13,6 +13,6 @@ public class LaporanKegiatan implements Dilaporkan {
 
     @Override
     public void exportPDF() {
-        System.out.println("Mengeksport Sertifikat Audit Sampah ke format PDF (Siap disisipkan ke LPJ)...");
+        System.out.println("Mengeksport Sertifikat Audit Sampah ke format PDF");
     }
 }

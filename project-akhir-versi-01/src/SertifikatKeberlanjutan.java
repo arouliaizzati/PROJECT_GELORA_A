@@ -16,7 +16,7 @@ public class SertifikatKeberlanjutan implements Dilaporkan, Terverifikasi {
 
     @Override
     public void exportPDF() {
-        System.out.println("Mengeksport Sertifikat Keberlanjutan (PDF dengan QR Code Verifikasi) untuk lampiran LPJ...");
+        System.out.println("Mengeksport Sertifikat Keberlanjutan (PDF dengan QR Code Verifikasi)");
     }
 
     @Override
