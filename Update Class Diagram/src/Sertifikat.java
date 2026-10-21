@@ -21,6 +21,7 @@ public class Sertifikat {
                 + "' | terbit " + tanggalTerbit + " | " + linkVerifikasi);
     }
 
+    
     public boolean verifikasiKeabsahan(String kode) {
         return kodeVerifikasi.equals(kode);
     }
