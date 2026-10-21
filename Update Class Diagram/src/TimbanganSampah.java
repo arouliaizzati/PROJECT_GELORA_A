@@ -21,5 +21,14 @@ public class TimbanganSampah {
     public void uploadFoto(String fotoBukti) {
         this.fotoBukti = fotoBukti;
         System.out.println("Foto bukti timbangan berhasil diunggah.");
+        
     }
+
+    public float getTotal() { return beratOrganik + beratDaurUlang + beratResidu; }
+    public String getIdTimbangan() { return idTimbangan; }
+    public float getBeratOrganik() { return beratOrganik; }
+    public float getBeratDaurUlang() { return beratDaurUlang; }
+    public float getBeratResidu() { return beratResidu; }
+    public String getFotoBukti() { return fotoBukti; }
+
 }

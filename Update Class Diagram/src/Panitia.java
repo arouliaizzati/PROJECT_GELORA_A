@@ -8,6 +8,7 @@ public class Panitia {
     private String password;
     private String noTelepon;
 
+    
     private List<Event> daftarEvent = new ArrayList<>();
 
     public Panitia(String idPanitia, String namaOrmawa, String email, String password, String noTelepon) {
@@ -19,27 +20,42 @@ public class Panitia {
     }
 
     public void register() {
-        System.out.println("Register Panitia " + namaOrmawa);
+        System.out.println("[Panitia] " + namaOrmawa + " terdaftar dengan email " + email);
     }
 
-    public boolean login() {
-        System.out.println("Panitia " + email + " login.");
-        return true;
+    public boolean login(String emailInput, String passwordInput) {
+        return email.equals(emailInput) && password.equals(passwordInput);
     }
 
-    public void hitungEcoBudgeting() {
-        System.out.println("Menghitung Eco Budgeting...");
+    // Relasi "Mengelola"
+    public void kelolaEvent(Event event) {
+        if (!daftarEvent.contains(event)) {
+            daftarEvent.add(event);
+            event.setPanitia(this);
+        }
     }
 
-    public void inputTimbangan() {
-        System.out.println("Input data timbangan...");
+    public void hitungEcoBudgeting(Event event) {
+        event.hitungEstimasiSampah();
+        System.out.println("[Eco-Budgeting] " + event.getNamaEvent() + " -> " + event.getRekLogistikTempatSampah());
     }
 
-    public void generateSertifikat() {
-        System.out.println("Generate Sertifikat...");
+    public void inputTimbangan(Event event, float organik, float daurUlang, float residu, String fotoBukti) {
+        if (!daftarEvent.contains(event)) {
+            throw new IllegalArgumentException("Event bukan milik panitia ini");
+        }
+        event.catatTimbangan(organik, daurUlang, residu, fotoBukti);
     }
 
-    public void tambahEvent(Event event) {
-        this.daftarEvent.add(event);
+    public void generateSertifikat(Event event) {
+        if (event.getSertifikat() == null) {
+            System.out.println("[Panitia] Sertifikat belum bisa dibuat: menunggu approval Admin.");
+            return;
+        }
+        event.getSertifikat().generateSertifikat();
     }
+
+    public String getIdPanitia() { return idPanitia; }
+    public String getNamaOrmawa() { return namaOrmawa; }
+    public List<Event> getDaftarEvent() { return Collections.unmodifiableList(daftarEvent); }
 }

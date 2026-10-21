@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.util.Date;
 
 public class Sertifikat {
@@ -16,11 +17,16 @@ public class Sertifikat {
     }
 
     public void generateSertifikat() {
-        System.out.println("Sertifikat berhasil digenerate.");
+        System.out.println("[Sertifikat] PDF + QR dibuat untuk '" + event.getNamaEvent()
+                + "' | terbit " + tanggalTerbit + " | " + linkVerifikasi);
     }
 
-    public boolean verifikasiKeabsahan() {
-        System.out.println("Verifikasi keabsahan sertifikat...");
-        return true;
+    public boolean verifikasiKeabsahan(String kode) {
+        return kodeVerifikasi.equals(kode);
     }
+
+    public String getIdSertifikat() { return idSertifikat; }
+    public String getKodeVerifikasi() { return kodeVerifikasi; }
+    public LocalDate getTanggalTerbit() { return tanggalTerbit; }
 }
+
