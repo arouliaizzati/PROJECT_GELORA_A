@@ -14,7 +14,6 @@ public class GreenLeaderboard {
 
     public void updatePeringkat() {
         totalPoinOrmawa += event.getZeroWasteScore();
-        // aturan sederhana untuk demo
         peringkat = totalPoinOrmawa >= 80 ? 1 : (totalPoinOrmawa >= 50 ? 2 : 3);
     }
 

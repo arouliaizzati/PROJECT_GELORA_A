@@ -21,15 +21,12 @@ public class Event {
     private float zeroWasteScore;
     private String status = PENDING_VERIFIKASI;
 
-    // ===== ASSOCIATION =====
     private Panitia panitia;               // Panitia 1 --- 0..* Event (juga AGGREGATION dari sisi Panitia)
     private Admin verifikator;             // Admin 1 --- 0..* Event
     private GreenLeaderboard leaderboard;  // Event 1 --- 0..1 GreenLeaderboard
 
-    // ===== AGGREGATION =====
     private final List<Advisory> daftarAdvisory = new ArrayList<>();   // Event 1 <>--- 0..* Advisory
 
-    // ===== COMPOSITION (part dibuat & dimiliki Event) =====
     private final JadwalEvent jadwal;                                   // 1
     private final List<TitikSampah> daftarTitik = new ArrayList<>();    // 0..*
     private final List<FeedbackPengunjung> daftarFeedback = new ArrayList<>(); // 0..*
@@ -42,7 +39,6 @@ public class Event {
         this.tanggalEvent = tanggalEvent;
         this.targetPeserta = targetPeserta;
         this.jenisKegiatan = jenisKegiatan;
-        // multiplicity 1: jadwal selalu ada sejak event dibuat
         this.jadwal = new JadwalEvent("JDW-" + idEvent, this, tanggalEvent, tanggalEvent, "Perencanaan");
     }
 
@@ -95,7 +91,7 @@ public class Event {
     public void terimaFeedback(Pengunjung pengunjung, int rating, String catatan) {
         FeedbackPengunjung f = new FeedbackPengunjung("FB-" + idEvent + "-" + (daftarFeedback.size() + 1),
                 this, pengunjung, rating, catatan);
-        f.kirimFeedback(); // validasi dulu; kalau gagal, tidak tersimpan
+        f.kirimFeedback(); 
         daftarFeedback.add(f);
         pengunjung.tambahRiwayat(f);
     }

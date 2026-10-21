@@ -12,33 +12,28 @@ public class Main {
         panitia.register();
         System.out.println("Login berhasil? " + panitia.login("himatrpl@apps.ipb.ac.id", "rahasia123"));
 
-        // ---(aggregation) ---
         Event event = new Event("EVT-01", "Dies Natalis Sekolah Vokasi", LocalDate.of(2026, 11, 20), 400, "Seminar & Bazar");
         event.buatEvent();
         panitia.kelolaEvent(event);
         panitia.hitungEcoBudgeting(event);
         event.getJadwal().aturJadwal(LocalDate.of(2026, 11, 20), LocalDate.of(2026, 11, 21), "Pelaksanaan");
-        event.tambahAdvisory(advisory);                                    // aggregation
-        event.tambahTitik("Gerbang Utama", -6.5560f, 106.7260f, "Organik");   // composition
+        event.tambahAdvisory(advisory);                              
+        event.tambahTitik("Gerbang Utama", -6.5560f, 106.7260f, "Organik"); 
         event.tambahTitik("Aula Barat", -6.5565f, 106.7268f, "Daur Ulang");
-        new GreenLeaderboard("LB-01", event);                               // association
+        new GreenLeaderboard("LB-01", event);                              
         advisory.tampilkanKatalogAdvisory();
 
-        // --- 2. Admin menyetujui event ---
         admin.verifikasiEvent(event);
 
-        // --- 3. Pengunjung ---
         pengunjung.lihatPetaSampah(event);
         pengunjung.kirimFeedback(event, 5, "Tempat sampahnya jelas dan bersih");
 
-        // --- 4. Audit pasca-acara ---
-        panitia.generateSertifikat(event);                      // belum bisa
+        panitia.generateSertifikat(event);  
         panitia.inputTimbangan(event, 40f, 25f, 10f, "uploads/timbangan_evt01.jpg");
         admin.validasiAudit(event);
         admin.approveSertifikat(event);
         panitia.generateSertifikat(event);
 
-        // --- 5. Hasil ---
         event.tampilkanDetailEvent();
         System.out.println("Verifikasi kode sah? "
                 + event.getSertifikat().verifikasiKeabsahan("GELORA-EVT-01"));
