@@ -29,8 +29,8 @@ public class Admin {
 
     public boolean validasiAudit(Event event) {
         TimbanganSampah t = event.getTimbangan();
-        if (t == null || !t.isValid()) {
-            System.out.println("[Admin] Audit ditolak: data/foto bukti timbangan belum lengkap.");
+        if (t == null) {
+            System.out.println("[Admin] Audit ditolak: data timbangan belum tersedia.");
             return false;
         }
         event.hitungDiversionRateAndKarbon();
@@ -51,5 +51,6 @@ public class Admin {
     
     public String getIdAdmin() { return idAdmin; }
     public String getNamaAdmin() { return namaAdmin; }
+    public String getEmail() { return email; }
     public List<Event> getEventDiverifikasi() { return Collections.unmodifiableList(eventDiverifikasi); }
 }
