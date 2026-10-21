@@ -14,6 +14,13 @@ public class FeedbackPengunjung {
     }
 
     public void kirimFeedback() {
-        System.out.println("Feedback dari pengunjung " + idPengunjung + " berhasil dikirim.");
+        if (ratingKebersihan < 1 || ratingKebersihan > 5) {
+            throw new IllegalArgumentException("Rating kebersihan harus 1-5");
+        }
+        System.out.println("[Feedback] " + pengunjung.getEmail() + " memberi rating " + ratingKebersihan
+                + " untuk '" + event.getNamaEvent() + "': " + catatanSaran);
     }
+
+    public String getIdFeedback() { return idFeedback; }
+    public int getRatingKebersihan() { return ratingKebersihan; }
 }

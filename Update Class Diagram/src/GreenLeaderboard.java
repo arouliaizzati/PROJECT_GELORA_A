@@ -1,27 +1,28 @@
+import java.util.Locale;
+
 public class GreenLeaderboard {
     private String idLeaderboard;
-    private String idEvent;
+    private Event event;
     private float totalPoinOrmawa;
     private int peringkat;
 
-    public GreenLeaderboard(String idLeaderboard, String idEvent, float totalPoinOrmawa, int peringkat) {
+    public GreenLeaderboard(String idLeaderboard, Event event) {
         this.idLeaderboard = idLeaderboard;
-        this.idEvent = idEvent;
-        this.totalPoinOrmawa = totalPoinOrmawa;
-        this.peringkat = peringkat;
+        this.event = event;
+        event.setLeaderboard(this);
     }
 
-    public void updatePeringkat(int peringkatBaru) {
-        this.peringkat = peringkatBaru;
-        System.out.println("Peringkat leaderboard diperbarui.");
+    public void updatePeringkat() {
+        totalPoinOrmawa += event.getZeroWasteScore();
+        peringkat = totalPoinOrmawa >= 80 ? 1 : (totalPoinOrmawa >= 50 ? 2 : 3);
     }
 
     public void tampilkanPapan() {
-        System.out.println("Tampilkan Green Leaderboard.");
+        System.out.printf(Locale.US, "[Leaderboard] %s | total poin %.1f | peringkat %d%n",
+                event.getNamaEvent(), totalPoinOrmawa, peringkat);
     }
 
     public String getIdLeaderboard() { return idLeaderboard; }
-    public String getIdEvent() { return idEvent; }
     public float getTotalPoinOrmawa() { return totalPoinOrmawa; }
     public int getPeringkat() { return peringkat; }
 }

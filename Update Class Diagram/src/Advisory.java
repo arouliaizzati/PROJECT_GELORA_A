@@ -14,6 +14,10 @@ public class Advisory {
     }
 
     public void tampilKatalogAdvisory() {
-        System.out.println("Menampilkan katalog advisory: " + namaReferensi);
+        System.out.println("[Advisory] " + namaReferensi + " (" + jenisReferensi + ") | Mitra: "
+                + kontakMitraLokal + " | Kemasan: " + katalogKemasan);
     }
+
+    public String getIdAdvisory() { return idAdvisory; }
+    public String getNamaReferensi() { return namaReferensi; }
 }

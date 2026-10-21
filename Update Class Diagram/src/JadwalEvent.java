@@ -1,21 +1,33 @@
-import java.util.Date;
+import java.time.LocalDate;
 
 public class JadwalEvent {
     private String idJadwal;
-    private String idEvent;
-    private Date tglMulai;
-    private Date tglSelesai;
+    private Event event;
+    private LocalDate tglMulai;
+    private LocalDate tglSelesai;
     private String tahapKegiatan;
 
-    public JadwalEvent(String idJadwal, String idEvent) {
+    // package-private: hanya Event yang boleh membuat -> COMPOSITION
+    JadwalEvent(String idJadwal, Event event, LocalDate tglMulai, LocalDate tglSelesai, String tahapKegiatan) {
         this.idJadwal = idJadwal;
-        this.idEvent = idEvent;
-    }
-
-    public void aturJadwal(Date tglMulai, Date tglSelesai, String tahapKegiatan) {
+        this.event = event;
         this.tglMulai = tglMulai;
         this.tglSelesai = tglSelesai;
         this.tahapKegiatan = tahapKegiatan;
-        System.out.println("Jadwal event diatur.");
     }
+
+    public void aturJadwal(LocalDate mulai, LocalDate selesai, String tahap) {
+        if (selesai.isBefore(mulai)) {
+            throw new IllegalArgumentException("Tanggal selesai tidak boleh sebelum tanggal mulai");
+        }
+        this.tglMulai = mulai;
+        this.tglSelesai = selesai;
+        this.tahapKegiatan = tahap;
+        System.out.println("[Jadwal] " + event.getNamaEvent() + ": " + mulai + " s/d " + selesai + " (" + tahap + ")");
+    }
+
+    public String getIdJadwal() { return idJadwal; }
+    public LocalDate getTglMulai() { return tglMulai; }
+    public LocalDate getTglSelesai() { return tglSelesai; }
+    public String getTahapKegiatan() { return tahapKegiatan; }
 }
