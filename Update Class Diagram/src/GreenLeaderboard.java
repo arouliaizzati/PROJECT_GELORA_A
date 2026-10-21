@@ -19,4 +19,9 @@ public class GreenLeaderboard {
     public void tampilkanPapan() {
         System.out.println("Tampilkan Green Leaderboard.");
     }
+
+    public String getIdLeaderboard() { return idLeaderboard; }
+    public String getIdEvent() { return idEvent; }
+    public float getTotalPoinOrmawa() { return totalPoinOrmawa; }
+    public int getPeringkat() { return peringkat; }
 }
