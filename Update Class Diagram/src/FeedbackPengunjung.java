@@ -4,13 +4,17 @@ public class FeedbackPengunjung {
     private String idPengunjung;
     private int ratingKebersihan;
     private String catatanSaran;
+    private Event event;
+    private Pengunjung pengunjung;
 
-    public FeedbackPengunjung(String idFeedback, String idEvent, String idPengunjung, int ratingKebersihan, String catatanSaran) {
+    public FeedbackPengunjung(String idFeedback, Event event, Pengunjung pengunjung, int ratingKebersihan, String catatanSaran) {
         this.idFeedback = idFeedback;
-        this.idEvent = idEvent;
-        this.idPengunjung = idPengunjung;
+        this.idEvent = event.getIdEvent();
+        this.idPengunjung = pengunjung.getIdPengunjung();
         this.ratingKebersihan = ratingKebersihan;
         this.catatanSaran = catatanSaran;
+        this.event = event;
+        this.pengunjung = pengunjung;
     }
 
     public void kirimFeedback() {

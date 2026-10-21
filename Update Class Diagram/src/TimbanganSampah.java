@@ -24,6 +24,10 @@ public class TimbanganSampah {
         
     }
 
+    public boolean isValid() {
+        return getTotal() > 0 && fotoBukti != null && !fotoBukti.isBlank();
+    }
+
     public float getTotal() { return beratOrganik + beratDaurUlang + beratResidu; }
     public String getIdTimbangan() { return idTimbangan; }
     public float getBeratOrganik() { return beratOrganik; }

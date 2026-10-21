@@ -1,50 +1,42 @@
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class Event {
-
     public static final String PENDING_VERIFIKASI = "PENDING_VERIFIKASI";
     public static final String DISETUJUI = "DISETUJUI";
     public static final String VERIFIED = "VERIFIED";
 
     private String idEvent;
-    private String idPanitia;
     private String namaEvent;
-    private Date tanggalEvent;
+    private LocalDate tanggalEvent;
     private int targetPeserta;
     private String jenisKegiatan;
+    private String status = PENDING_VERIFIKASI;
     private float volumeEstimasiSampah;
     private String rekLogistikTempatSampah;
     private float diversionRate;
     private float reduksiKarbon;
     private float zeroWasteScore;
 
-    // ===== ASSOCIATION =====
-    private Panitia panitia; 
+    private Panitia panitia;
     private Admin verifikator;
     private GreenLeaderboard leaderboard;
-
-    // ===== AGGREGATION =====
     private final List<Advisory> daftarAdvisory = new ArrayList<>();
+    private final JadwalEvent jadwal;
+    private final List<TitikSampah> daftarTitik = new ArrayList<>();
+    private final List<FeedbackPengunjung> daftarFeedback = new ArrayList<>();
+    private TimbanganSampah timbangan;
+    private Sertifikat sertifikat;
 
-   // ===== COMPOSITION (part dibuat & dimiliki Event) =====
-    private final JadwalEvent jadwal;                                   // 1
-    private final List<TitikSampah> daftarTitik = new ArrayList<>();    // 0..*
-    private final List<FeedbackPengunjung> daftarFeedback = new ArrayList<>(); // 0..*
-    private TimbanganSampah timbangan;                                  // 0..1
-    private Sertifikat sertifikat;   
-
-    public Event(String idEvent, String idPanitia, String namaEvent, Date tanggalEvent, int targetPeserta, String jenisKegiatan) {
+    public Event(String idEvent, String namaEvent, LocalDate tanggalEvent, int targetPeserta, String jenisKegiatan) {
         this.idEvent = idEvent;
-        this.idPanitia = idPanitia;
         this.namaEvent = namaEvent;
         this.tanggalEvent = tanggalEvent;
         this.targetPeserta = targetPeserta;
         this.jenisKegiatan = jenisKegiatan;
-
         this.jadwal = new JadwalEvent("JDW-" + idEvent, this, tanggalEvent, tanggalEvent, "Perencanaan");
     }
 
@@ -90,9 +82,8 @@ public class Event {
 
     // ===== Pembuat part (COMPOSITION) =====
     public TitikSampah tambahTitik(String nama, float x, float y, String jenisTerpilah) {
-        TitikSampah t = new TitikSampah("TTK-" + idEvent + "-" + (daftarTitik.size() + 1), this, nama, x, y, jenisTerpilah);
+        TitikSampah t = new TitikSampah("TTK-" + idEvent + "-" + (daftarTitik.size() + 1), idEvent, nama, x, y, jenisTerpilah);
         daftarTitik.add(t);
-        t.tambahTitik();
         return t;
     }
 
@@ -106,7 +97,7 @@ public class Event {
 
     public void catatTimbangan(float organik, float daurUlang, float residu, String fotoBukti) {
         if (timbangan == null) {
-            timbangan = new TimbanganSampah("TMB-" + idEvent, this);
+            timbangan = new TimbanganSampah("TMB-" + idEvent, idEvent);
         }
         timbangan.inputBerat(organik, daurUlang, residu);
         timbangan.uploadFoto(fotoBukti);

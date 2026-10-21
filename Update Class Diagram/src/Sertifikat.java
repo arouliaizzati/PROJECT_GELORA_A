@@ -1,19 +1,20 @@
 import java.time.LocalDate;
-import java.util.Date;
 
 public class Sertifikat {
     private String idSertifikat;
     private String idEvent;
     private String kodeVerifikasi;
-    private Date tanggalTerbit;
+    private LocalDate tanggalTerbit;
     private String linkVerifikasi;
+    private Event event;
 
-    public Sertifikat(String idSertifikat, String idEvent, String kodeVerifikasi, Date tanggalTerbit, String linkVerifikasi) {
+    public Sertifikat(String idSertifikat, Event event, String kodeVerifikasi) {
         this.idSertifikat = idSertifikat;
-        this.idEvent = idEvent;
+        this.idEvent = event.getIdEvent();
         this.kodeVerifikasi = kodeVerifikasi;
-        this.tanggalTerbit = tanggalTerbit;
-        this.linkVerifikasi = linkVerifikasi;
+        this.tanggalTerbit = LocalDate.now();
+        this.linkVerifikasi = "https://gelora.local/verify/" + kodeVerifikasi;
+        this.event = event;
     }
 
     public void generateSertifikat() {

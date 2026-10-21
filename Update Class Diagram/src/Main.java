@@ -22,7 +22,7 @@ public class Main {
         event.tambahTitik("Gerbang Utama", -6.5560f, 106.7260f, "Organik");   // composition
         event.tambahTitik("Aula Barat", -6.5565f, 106.7268f, "Daur Ulang");
         new GreenLeaderboard("LB-01", event);                               // association
-        advisory.tampilkanKatalogAdvisory();
+        advisory.tampilKatalogAdvisory();
 
         // --- 2. Admin menyetujui event ---
         admin.verifikasiEvent(event);

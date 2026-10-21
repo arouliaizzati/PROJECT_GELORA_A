@@ -40,7 +40,8 @@ public class Admin {
     }
 
 
-    public void approveSertifikat() {if (!Event.VERIFIED.equals(event.getStatus())) {
+    public void approveSertifikat(Event event) {
+        if (!Event.VERIFIED.equals(event.getStatus())) {
             System.out.println("[Admin] Approve ditolak: audit belum VERIFIED.");
             return;
         }
