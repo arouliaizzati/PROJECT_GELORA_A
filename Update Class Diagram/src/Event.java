@@ -1,5 +1,4 @@
 import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -10,22 +9,13 @@ public class Event {
     public static final String DISETUJUI = "DISETUJUI";
     public static final String VERIFIED = "VERIFIED";
 
-<<<<<<< HEAD
     private String idEvent;
+    private String idPanitia;
     private String namaEvent;
     private LocalDate tanggalEvent;
     private int targetPeserta;
     private String jenisKegiatan;
     private String status = PENDING_VERIFIKASI;
-=======
-    private final String idEvent;
-    private final String idPanitia;
-    private final String namaEvent;
-    private String status;
-    private final Date tanggalEvent;
-    private final int targetPeserta;
-    private final String jenisKegiatan;
->>>>>>> c912a973c485abb9936974cabf625574cbda9fc0
     private float volumeEstimasiSampah;
     private String rekLogistikTempatSampah;
     private float diversionRate;
@@ -48,13 +38,7 @@ public class Event {
         this.tanggalEvent = tanggalEvent;
         this.targetPeserta = targetPeserta;
         this.jenisKegiatan = jenisKegiatan;
-<<<<<<< HEAD
         this.jadwal = new JadwalEvent("JDW-" + idEvent, this, tanggalEvent, tanggalEvent, "Perencanaan");
-=======
-
-        LocalDate tanggal = tanggalEvent.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-        this.jadwal = new JadwalEvent("JDW-" + idEvent, this, tanggal, tanggal, "Perencanaan");
->>>>>>> c912a973c485abb9936974cabf625574cbda9fc0
     }
 
 
@@ -106,7 +90,7 @@ public class Event {
 
     public void terimaFeedback(Pengunjung pengunjung, int rating, String catatan) {
         FeedbackPengunjung f = new FeedbackPengunjung("FB-" + idEvent + "-" + (daftarFeedback.size() + 1),
-            idEvent, pengunjung.getIdPengunjung(), rating, catatan);
+                this, pengunjung, rating, catatan);
         f.kirimFeedback(); // validasi dulu; kalau gagal, tidak tersimpan
         daftarFeedback.add(f);
         pengunjung.tambahRiwayat(f);
@@ -122,7 +106,7 @@ public class Event {
 
     public Sertifikat terbitkanSertifikat() {
         if (sertifikat == null) {
-            sertifikat = new Sertifikat("SRT-" + idEvent, idEvent, namaEvent, new Date(), "GELORA-" + idEvent);
+            sertifikat = new Sertifikat("SRT-" + idEvent, this, "GELORA-" + idEvent);
         }
         return sertifikat;
     }
@@ -134,7 +118,10 @@ public class Event {
         }
     }
 
-    void setPanitia(Panitia panitia) { this.panitia = panitia; }
+    void setPanitia(Panitia panitia) {
+        this.panitia = panitia;
+        this.idPanitia = panitia.getIdPanitia();
+    }
     void setVerifikator(Admin admin) { this.verifikator = admin; }
     void setLeaderboard(GreenLeaderboard lb) { this.leaderboard = lb; }
     void setStatus(String status) { this.status = status; }

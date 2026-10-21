@@ -5,6 +5,8 @@ import java.util.List;
 public class Pengunjung {
     private String idPengunjung;
     private String email;
+
+    // ASSOCIATION (Pengunjung 1 ---> 0..* FeedbackPengunjung)
     private final List<FeedbackPengunjung> riwayatFeedback = new ArrayList<>();
 
     public Pengunjung(String idPengunjung, String email) {
@@ -19,10 +21,11 @@ public class Pengunjung {
         }
     }
 
-     public void kirimFeedback(Event event, int rating, String catatan) {
+    public void kirimFeedback(Event event, int rating, String catatan) {
         event.terimaFeedback(this, rating, catatan);
     }
 
+    
     void tambahRiwayat(FeedbackPengunjung f) { riwayatFeedback.add(f); }
 
     public String getIdPengunjung() { return idPengunjung; }

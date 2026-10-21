@@ -9,8 +9,8 @@ public class Panitia {
     private String password;
     private String noTelepon;
 
-    
-    private List<Event> daftarEvent = new ArrayList<>();
+    // AGGREGATION (Panitia 1 <>--- 0..* Event)
+    private final List<Event> daftarEvent = new ArrayList<>();
 
     public Panitia(String idPanitia, String namaOrmawa, String email, String password, String noTelepon) {
         this.idPanitia = idPanitia;

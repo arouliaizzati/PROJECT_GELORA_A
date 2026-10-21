@@ -2,19 +2,18 @@ import java.time.LocalDate;
 
 public class Sertifikat {
     private String idSertifikat;
-    private String idEvent;
+    private Event event;
     private String kodeVerifikasi;
     private LocalDate tanggalTerbit;
     private String linkVerifikasi;
-    private Event event;
 
-    public Sertifikat(String idSertifikat, Event event, String kodeVerifikasi) {
+    
+    Sertifikat(String idSertifikat, Event event, String kodeVerifikasi) {
         this.idSertifikat = idSertifikat;
-        this.idEvent = event.getIdEvent();
+        this.event = event;
         this.kodeVerifikasi = kodeVerifikasi;
         this.tanggalTerbit = LocalDate.now();
-        this.linkVerifikasi = "https://gelora.local/verify/" + kodeVerifikasi;
-        this.event = event;
+        this.linkVerifikasi = "https://gelora.example/verifikasi/" + kodeVerifikasi;
     }
 
     public void generateSertifikat() {
@@ -30,4 +29,3 @@ public class Sertifikat {
     public String getKodeVerifikasi() { return kodeVerifikasi; }
     public LocalDate getTanggalTerbit() { return tanggalTerbit; }
 }
-

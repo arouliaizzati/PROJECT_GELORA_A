@@ -2,7 +2,7 @@ import java.time.LocalDate;
 
 public class Main {
     public static void main(String[] args) {
-        // --- objek yang hidup mandiri ---
+        
         Panitia panitia = new Panitia("PNT-01", "HIMATRPL", "himatrpl@apps.ipb.ac.id", "rahasia123", "081234567890");
         Admin admin = new Admin("ADM-01", "Admin Sarpras", "admin@ipb.ac.id", "admin123");
         Pengunjung pengunjung = new Pengunjung("PGJ-01", "mahasiswa@apps.ipb.ac.id");
@@ -12,7 +12,7 @@ public class Main {
         panitia.register();
         System.out.println("Login berhasil? " + panitia.login("himatrpl@apps.ipb.ac.id", "rahasia123"));
 
-        // --- 1. Perencanaan: Event dibuat lalu dikelola Panitia (aggregation) ---
+        // ---(aggregation) ---
         Event event = new Event("EVT-01", "Dies Natalis Sekolah Vokasi", LocalDate.of(2026, 11, 20), 400, "Seminar & Bazar");
         event.buatEvent();
         panitia.kelolaEvent(event);
@@ -22,7 +22,7 @@ public class Main {
         event.tambahTitik("Gerbang Utama", -6.5560f, 106.7260f, "Organik");   // composition
         event.tambahTitik("Aula Barat", -6.5565f, 106.7268f, "Daur Ulang");
         new GreenLeaderboard("LB-01", event);                               // association
-        advisory.tampilKatalogAdvisory();
+        advisory.tampilkanKatalogAdvisory();
 
         // --- 2. Admin menyetujui event ---
         admin.verifikasiEvent(event);

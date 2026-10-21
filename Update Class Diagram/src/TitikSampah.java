@@ -2,15 +2,26 @@ import java.util.Locale;
 
 public class TitikSampah {
     private String idTitik;
-    private String idEvent;
+    private Event event;
     private String namaLokasi;
     private float koordinatX;
     private float koordinatY;
     private String jenisTerpilah;
 
-    public TitikSampah(String idTitik, String idEvent, String namaLokasi, float koordinatX, float koordinatY, String jenisTerpilah) {
+    TitikSampah(String idTitik, Event event, String namaLokasi, float koordinatX, float koordinatY, String jenisTerpilah) {
         this.idTitik = idTitik;
-        this.idEvent = idEvent;
+        this.event = event;
+        this.namaLokasi = namaLokasi;
+        this.koordinatX = koordinatX;
+        this.koordinatY = koordinatY;
+        this.jenisTerpilah = jenisTerpilah;
+    }
+
+    public void tambahTitik() {
+        System.out.println("[Titik Sampah] Ditambahkan: " + namaLokasi + " (" + jenisTerpilah + ")");
+    }
+
+    public void updateTitik(String namaLokasi, float koordinatX, float koordinatY, String jenisTerpilah) {
         this.namaLokasi = namaLokasi;
         this.koordinatX = koordinatX;
         this.koordinatY = koordinatY;
