@@ -36,3 +36,4 @@ public class TimbanganSampah {
     public float getBeratResidu() { return beratResidu; }
     public String getFotoBukti() { return fotoBukti; }
 }
+//
