@@ -1,4 +1,4 @@
-public class AuditFisik implements Terverifikasi {
+public class AuditFisik implements TimbanganSampah {
     @SuppressWarnings("FieldMayBeFinal")
     private boolean fotoBuktiAda;
 
