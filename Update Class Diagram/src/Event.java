@@ -9,28 +9,32 @@ public class Event {
     public static final String DISETUJUI = "DISETUJUI";
     public static final String VERIFIED = "VERIFIED";
 
-    private String idEvent;
-    private String idPanitia;
+    private final String idEvent;
     private String namaEvent;
     private LocalDate tanggalEvent;
     private int targetPeserta;
     private String jenisKegiatan;
-    private String status = PENDING_VERIFIKASI;
     private float volumeEstimasiSampah;
     private String rekLogistikTempatSampah;
     private float diversionRate;
     private float reduksiKarbon;
     private float zeroWasteScore;
+    private String status = PENDING_VERIFIKASI;
 
-    private Panitia panitia;
-    private Admin verifikator;
-    private GreenLeaderboard leaderboard;
-    private final List<Advisory> daftarAdvisory = new ArrayList<>();
-    private final JadwalEvent jadwal;
-    private final List<TitikSampah> daftarTitik = new ArrayList<>();
-    private final List<FeedbackPengunjung> daftarFeedback = new ArrayList<>();
-    private TimbanganSampah timbangan;
-    private Sertifikat sertifikat;
+    // ===== ASSOCIATION =====
+    private Panitia panitia;               // Panitia 1 --- 0..* Event (juga AGGREGATION dari sisi Panitia)
+    private Admin verifikator;             // Admin 1 --- 0..* Event
+    private GreenLeaderboard leaderboard;  // Event 1 --- 0..1 GreenLeaderboard
+
+    // ===== AGGREGATION =====
+    private final List<Advisory> daftarAdvisory = new ArrayList<>();   // Event 1 <>--- 0..* Advisory
+
+    // ===== COMPOSITION (part dibuat & dimiliki Event) =====
+    private final JadwalEvent jadwal;                                   // 1
+    private final List<TitikSampah> daftarTitik = new ArrayList<>();    // 0..*
+    private final List<FeedbackPengunjung> daftarFeedback = new ArrayList<>(); // 0..*
+    private TimbanganSampah timbangan;                                  // 0..1
+    private Sertifikat sertifikat;                                      // 0..1
 
     public Event(String idEvent, String namaEvent, LocalDate tanggalEvent, int targetPeserta, String jenisKegiatan) {
         this.idEvent = idEvent;
@@ -38,9 +42,9 @@ public class Event {
         this.tanggalEvent = tanggalEvent;
         this.targetPeserta = targetPeserta;
         this.jenisKegiatan = jenisKegiatan;
+        // multiplicity 1: jadwal selalu ada sejak event dibuat
         this.jadwal = new JadwalEvent("JDW-" + idEvent, this, tanggalEvent, tanggalEvent, "Perencanaan");
     }
-
 
     public void buatEvent() {
         this.status = PENDING_VERIFIKASI;
@@ -81,10 +85,10 @@ public class Event {
                 diversionRate, reduksiKarbon, zeroWasteScore);
     }
 
-    // ===== Pembuat part (COMPOSITION) =====
     public TitikSampah tambahTitik(String nama, float x, float y, String jenisTerpilah) {
-        TitikSampah t = new TitikSampah("TTK-" + idEvent + "-" + (daftarTitik.size() + 1), idEvent, nama, x, y, jenisTerpilah);
+        TitikSampah t = new TitikSampah("TTK-" + idEvent + "-" + (daftarTitik.size() + 1), this, nama, x, y, jenisTerpilah);
         daftarTitik.add(t);
+        t.tambahTitik();
         return t;
     }
 
@@ -98,7 +102,7 @@ public class Event {
 
     public void catatTimbangan(float organik, float daurUlang, float residu, String fotoBukti) {
         if (timbangan == null) {
-            timbangan = new TimbanganSampah("TMB-" + idEvent, idEvent);
+            timbangan = new TimbanganSampah("TMB-" + idEvent, this);
         }
         timbangan.inputBerat(organik, daurUlang, residu);
         timbangan.uploadFoto(fotoBukti);
@@ -111,24 +115,18 @@ public class Event {
         return sertifikat;
     }
 
-    // ===== Penghubung relasi non-composition =====
-    public void tambahAdvisory(Advisory advisory) {   // AGGREGATION: advisory dibuat di luar
+    public void tambahAdvisory(Advisory advisory) {
         if (!daftarAdvisory.contains(advisory)) {
             daftarAdvisory.add(advisory);
         }
     }
 
-    void setPanitia(Panitia panitia) {
-        this.panitia = panitia;
-        this.idPanitia = panitia.getIdPanitia();
-    }
+    void setPanitia(Panitia panitia) { this.panitia = panitia; }
     void setVerifikator(Admin admin) { this.verifikator = admin; }
     void setLeaderboard(GreenLeaderboard lb) { this.leaderboard = lb; }
     void setStatus(String status) { this.status = status; }
 
-    // ===== Getter =====
     public String getIdEvent() { return idEvent; }
-    public String getIdPanitia() { return idPanitia; }
     public String getNamaEvent() { return namaEvent; }
     public String getStatus() { return status; }
     public String getRekLogistikTempatSampah() { return rekLogistikTempatSampah; }

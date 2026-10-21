@@ -7,7 +7,6 @@ public class JadwalEvent {
     private LocalDate tglSelesai;
     private String tahapKegiatan;
 
-    // package-private: hanya Event yang boleh membuat -> COMPOSITION
     JadwalEvent(String idJadwal, Event event, LocalDate tglMulai, LocalDate tglSelesai, String tahapKegiatan) {
         this.idJadwal = idJadwal;
         this.event = event;
